@@ -10,7 +10,9 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
-                    "http://localhost:3000"  // 前端实际使用的端口
+                    "http://localhost:3000",  // 开发环境前端端口
+                    "http://localhost",       // Docker环境前端端口
+                    "http://localhost:80"     // Docker环境前端端口（显式指定）
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD")
                 .allowedHeaders("*")
