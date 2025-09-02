@@ -11,6 +11,10 @@ COPY requirements.txt .
 # --no-cache-dir 选项可以减小最终镜像的体积
 RUN pip install --no-cache-dir -r requirements.txt
 
+# 【核心修改】为 Playwright 安装它需要的浏览器内核
+# 这会下载 Chromium, Firefox, WebKit 等浏览器到镜像中
+RUN playwright install
+
 # 复制所有应用代码（包括微调好的模型文件夹）
 COPY . .
 

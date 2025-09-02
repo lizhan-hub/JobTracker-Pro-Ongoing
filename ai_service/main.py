@@ -2,6 +2,7 @@
 #
 import time
 import random
+import os
 import requests
 from playwright.sync_api import sync_playwright
 # --- 配置 ---
@@ -22,7 +23,9 @@ import requests
 
 # --- 配置区 ---
 # Java后端的内部API地址
-BACKEND_INTAKE_URL = "http://localhost:8080/api/internal/jobs/batch-intake"
+# BACKEND_INTAKE_URL = "http://localhost:8080/api/internal/jobs/batch-intake"
+BACKEND_INTAKE_URL = os.environ.get("JAVA_BACKEND_INTAKE_URL", "http://localhost:8080/api/internal/jobs/batch-intake")
+# BACKEND_INTAKE_URL = "http://backend:8080/api/internal/jobs/batch-intake"
 # 必须和Java application.yml中的完全一样
 INTERNAL_API_KEY = "thisisaramdomandVeryLongStringtoMakeItASecretKey155423asc5assajci,w,YAJCB"
 
@@ -81,7 +84,7 @@ def save_jobs_batch_to_backend(jobs_data):
 def scrape_jobs():
     """主爬虫函数"""
 
-
+    print(BACKEND_INTAKE_URL)
     print("开始执行爬虫任务...")
 
     # 创建一个列表，用来存储所有抓取到的职位信息
@@ -103,7 +106,7 @@ def scrape_jobs():
 
             base_url = "https://weworkremotely.com"
 
-            for i, listing in enumerate(job_listings[:6], 1):  # 使用 enumerate 来跟踪是第几个职位
+            for i, listing in enumerate(job_listings[:2], 1):  # 使用 enumerate 来跟踪是第几个职位
                 try:
                     print(f"--- 正在解析第 {i} 个职位 ---")  # 调试信息，方便定位问题
 

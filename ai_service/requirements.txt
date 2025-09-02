@@ -6,3 +6,4 @@ flask
 flask-cors
 PyMuPDF     # 用于解析 PDF，性能极高
 python-docx # 用于解析 .docx Word 文档
+playwright
