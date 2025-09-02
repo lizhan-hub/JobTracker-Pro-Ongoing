@@ -39,3 +39,14 @@ jwt:
 app:
   # 用于内部服务间通信的API密钥，请务必修改为一个长且随机的字符串
   internal-api-key: "thisisaramdomandVeryLongStringtoMakeItASecretKey155423asc5assajci,w,YAJCB"
+
+# AI服务配置
+ai:
+  service:
+    url: ${AI_SERVICE_URL:http://localhost:5000}  # AI服务URL，支持环境变量，默认localhost
+
+# WebClient配置
+web:
+  client:
+    base:
+      url: ${WEB_CLIENT_BASE_URL:http://localhost:8000}  # WebClient基础URL，支持环境变量

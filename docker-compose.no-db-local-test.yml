@@ -19,6 +19,7 @@ services:
       - REDIS_PORT=6379
       - JWT_SECRET=${JWT_SECRET}
       - APP_INTERNAL_API_KEY=${APP_INTERNAL_API_KEY}
+      - AI_SERVICE_URL=http://ai_service:5000  # AI服务URL配置
       - AWS_REGION=${AWS_REGION}
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
@@ -47,6 +48,7 @@ services:
     container_name: jobtracker-ai-service
     restart: always
     environment:
+      - JAVA_BACKEND_INTAKE_URL=http://backend:8080/api/internal/jobs/batch-intake
       - JAVA_BACKEND_INTERNAL_JOBS_URL=http://backend:8080/api/internal/jobs
       - INTERNAL_API_KEY=${APP_INTERNAL_API_KEY}
 

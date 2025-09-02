@@ -7,8 +7,12 @@
     <list default="true" id="746ec9ef-2ebc-4baa-bd3c-7e913e51cdfa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ai_service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai_service/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ai_service/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/jobtracker/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jobtracker/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/jobtracker/service/impl/RecommendationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jobtracker/service/impl/RecommendationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.no-db-local-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.no-db-local-test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +138,7 @@
       <option name="presentableId" value="Default" />
       <updated>1756831371889</updated>
       <workItem from="1756831373330" duration="8555000" />
-      <workItem from="1756840207357" duration="3234000" />
+      <workItem from="1756840207357" duration="3831000" />
     </task>
     <servers />
   </component>

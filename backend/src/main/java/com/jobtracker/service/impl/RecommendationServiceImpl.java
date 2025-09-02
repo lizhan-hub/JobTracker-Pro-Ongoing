@@ -1,6 +1,7 @@
 package com.jobtracker.service.impl;
 
 import com.jobtracker.service.RecommendationService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
@@ -20,8 +21,14 @@ import java.util.HashMap;
 @Service
 public class RecommendationServiceImpl implements RecommendationService {
     // ... 已有的代码 ...
-    private final String aiServiceFileUrl = "http://localhost:5000/recommend_file";
+    @Value("${ai.service.url:http://localhost:5000}")
+    private String aiServiceBaseUrl;
+    
     private final RestTemplate restTemplate = new RestTemplate();
+    
+    private String getAiServiceFileUrl() {
+        return aiServiceBaseUrl + "/recommend_file";
+    }
     @Override
     public List<Map<String, Object>> getRecommendationsFromFile(MultipartFile resumeFile, String authToken) {
         HttpHeaders headers = new HttpHeaders();
@@ -46,7 +53,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<List> response = restTemplate.postForEntity(aiServiceFileUrl, requestEntity, List.class);
+        ResponseEntity<List> response = restTemplate.postForEntity(getAiServiceFileUrl(), requestEntity, List.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();

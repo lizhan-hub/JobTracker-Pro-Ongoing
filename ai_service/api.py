@@ -5,13 +5,15 @@ from matcher import find_best_matches
 import fitz  # PyMuPDF
 import docx # python-docx
 import io
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 # --- 配置区 ---
-JAVA_BACKEND_INTERNAL_JOBS_URL = "http://localhost:8080/api/internal/jobs"
-INTERNAL_API_KEY = "thisisaramdomandVeryLongStringtoMakeItASecretKey155423asc5assajci,w,YAJCB" # 必须和Java application.yml中的完全一样
+# 从环境变量读取配置，如果没有则使用默认值
+JAVA_BACKEND_INTERNAL_JOBS_URL = os.environ.get("JAVA_BACKEND_INTERNAL_JOBS_URL", "http://localhost:8080/api/internal/jobs")
+INTERNAL_API_KEY = os.environ.get("INTERNAL_API_KEY", "thisisaramdomandVeryLongStringtoMakeItASecretKey155423asc5assajci,w,YAJCB")
 
 def extract_text(file_stream, filename):
     """根据文件名后缀，从文件流中提取文本"""

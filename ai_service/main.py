@@ -27,7 +27,7 @@ import requests
 BACKEND_INTAKE_URL = os.environ.get("JAVA_BACKEND_INTAKE_URL", "http://localhost:8080/api/internal/jobs/batch-intake")
 # BACKEND_INTAKE_URL = "http://backend:8080/api/internal/jobs/batch-intake"
 # 必须和Java application.yml中的完全一样
-INTERNAL_API_KEY = "thisisaramdomandVeryLongStringtoMakeItASecretKey155423asc5assajci,w,YAJCB"
+INTERNAL_API_KEY = os.environ.get("INTERNAL_API_KEY", "thisisaramdomandVeryLongStringtoMakeItASecretKey155423asc5assajci,w,YAJCB")
 
 
 # def get_auth_token():
