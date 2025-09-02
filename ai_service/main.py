@@ -55,21 +55,26 @@ INTERNAL_API_KEY = "thisisaramdomandVeryLongStringtoMakeItASecretKey155423asc5as
 #         return None
 
 
-def save_job_to_backend(job_data):
-    """调用 Spring Boot 后端内部API保存职位数据 使用内部API密钥"""
+def save_jobs_batch_to_backend(jobs_data):
+    """批量调用 Spring Boot 后端内部API保存职位数据 使用内部API密钥"""
+    if not jobs_data:
+        print("没有职位数据需要保存")
+        return
+    
     try:
         headers = {
             'Content-Type': 'application/json',
             'X-Internal-API-Key': INTERNAL_API_KEY  # 使用内部API密钥
         }
-        response = requests.post(BACKEND_INTAKE_URL, json=job_data, headers=headers)
+        response = requests.post(BACKEND_INTAKE_URL, json=jobs_data, headers=headers)
 
         if response.status_code == 200 or response.status_code == 201:
-            print(f"成功保存职位: {job_data['title']}")
+            result = response.json()
+            print(f"成功批量保存 {result.get('count', len(jobs_data))} 个职位")
         else:
-            print(f"保存失败: {job_data['title']}, 状态码: {response.status_code}, 响应: {response.text}")
+            print(f"批量保存失败, 状态码: {response.status_code}, 响应: {response.text}")
     except Exception as e:
-        print(f"调用 API 时发生错误: {e}")
+        print(f"调用批量保存 API 时发生错误: {e}")
 
 
 
@@ -98,7 +103,7 @@ def scrape_jobs():
 
             base_url = "https://weworkremotely.com"
 
-            for i, listing in enumerate(job_listings, 1):  # 使用 enumerate 来跟踪是第几个职位
+            for i, listing in enumerate(job_listings[:6], 1):  # 使用 enumerate 来跟踪是第几个职位
                 try:
                     print(f"--- 正在解析第 {i} 个职位 ---")  # 调试信息，方便定位问题
 
@@ -155,9 +160,7 @@ def scrape_jobs():
                         "source": "We Work Remotely"
                     }
 
-                    save_job_to_backend(job_data)
-
-                    # 将数据存入列表
+                    # 将数据存入列表（不再逐个保存）
                     all_jobs_data.append(job_data)
 
                     # 随机延迟
@@ -178,6 +181,13 @@ def scrape_jobs():
             print(f"爬取过程中发生严重错误: {e}")
         finally:
             browser.close()
+
+    # --- 批量保存所有职位数据 ---
+    if all_jobs_data:
+        print(f"\n开始批量保存 {len(all_jobs_data)} 个职位...")
+        save_jobs_batch_to_backend(all_jobs_data)
+    else:
+        print("\n没有爬取到任何职位数据")
 
     # --- 在所有爬取结束后，统一打印结果 ---
     print("\n" + "=" * 50)

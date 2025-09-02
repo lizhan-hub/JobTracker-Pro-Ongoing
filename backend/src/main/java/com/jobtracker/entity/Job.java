@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  // 忽略懒加载相关属性
 @Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"title", "company"})
+    @UniqueConstraint(columnNames = {"url"})
 })
 public class Job {
     @Id

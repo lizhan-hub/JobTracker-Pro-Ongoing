@@ -26,7 +26,6 @@ CREATE TABLE user_favorites (
 
 
 
-
 -- 插入一些公开的职位数据
 INSERT INTO job (title, company, location, description, source) VALUES
 ('Java开发工程师', '阿里巴巴', '杭州', '负责Java后端开发，要求3年以上经验，熟悉Spring Boot、MySQL等技术栈', 'LinkedIn'),

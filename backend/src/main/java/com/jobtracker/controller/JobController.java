@@ -67,22 +67,7 @@ public class JobController {
         return ResponseEntity.ok().build();
     }
 
-    // 管理员接口
-    @PostMapping
-    public ResponseEntity<Job> createJob(@RequestBody Job job) {
-        return ResponseEntity.ok(jobService.createJob(job));
-    }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job job) {
-        return ResponseEntity.ok(jobService.updateJob(id, job));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteJob(@PathVariable Long id) {
-        jobService.deleteJob(id);
-        return ResponseEntity.ok().build();
-    }
 
 
     // 👇 *** 新增的文件上传接口 *** 👇

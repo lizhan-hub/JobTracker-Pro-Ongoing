@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
@@ -13,6 +14,9 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     List<Job> findByTitleContainingIgnoreCase(String title);
     List<Job> findByCompanyContainingIgnoreCase(String company);
     List<Job> findByLocationContainingIgnoreCase(String location);
+    
+    // 查找重复职位（基于URL）
+    Optional<Job> findByUrl(String url);
     
     // 组合搜索
     @Query("SELECT j FROM Job j WHERE " +

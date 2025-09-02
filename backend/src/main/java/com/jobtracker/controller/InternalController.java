@@ -38,15 +38,28 @@ public class InternalController {
      */
     @PostMapping("/jobs/batch-intake")
     public ResponseEntity<?> createJobsFromScraper(
-            @RequestBody Job job,
+            @RequestBody List<Job> jobs,
             @RequestHeader("X-Internal-API-Key") String apiKey) {
 
         if (!isApiKeyValid(apiKey)) {
             return unauthorizedResponse();
         }
 
-        jobService.createJob(job);
-        return ResponseEntity.ok(jobService.createJob(job));
+        if (jobs == null || jobs.isEmpty()) {
+            return ResponseEntity.badRequest().body("职位列表不能为空");
+        }
+
+        try {
+            List<Job> savedJobs = jobService.createJobsBatch(jobs);
+            return ResponseEntity.ok(Map.of(
+                "message", "成功批量保存职位",
+                "count", savedJobs.size(),
+                "jobs", savedJobs
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "批量保存职位失败: " + e.getMessage()));
+        }
     }
 
     // 辅助方法，用于验证API Key

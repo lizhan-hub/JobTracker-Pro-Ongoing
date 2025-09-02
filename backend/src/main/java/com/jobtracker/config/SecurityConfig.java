@@ -40,6 +40,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/jobs", "/api/jobs/**").permitAll()
                         .requestMatchers("/api/internal/**").permitAll() // <-- 新增：放行所有内部服务接口
+                        .requestMatchers("/api/admin/**").hasRole("RADMIN")
+
+                        // -- 普通用户路径 --
+                        // 所有以 /api/jobs/ 开头的接口，至少需要是 "USER" 角色（管理员也默认拥有USER权限）
+                        .requestMatchers("/api/jobs/**").hasAnyRole("USER", "ADMIN")
+                        // -- 兜底规则 --
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
